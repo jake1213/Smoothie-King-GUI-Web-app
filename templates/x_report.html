@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <title>X Report</title>
+      <link rel="stylesheet" href="/static/styles/manager.css" title="link to manager stylesheet for x report page" aria-label="link to manager stylesheet for x report page">
+   </head>
+   <body>
+      <!-- translation -->
+      <div id="google_translate_element"></div>
+
+      <script type="text/javascript" title="google translate styling for x report page" aria-label="google translate styling for x report page">
+      function googleTranslateElementInit() {
+         new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+      </script>
+      
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title="google translate for x report page" aria-label="google translate for x report page"></script>
+      <a href="{{ url_for('home')}}" title = "go back to home page logo from x report" aria-label = "go back to home page logo from x report"><img class = "pic_logo" alt = "smoothie king logo" src="/static/pictures/smoothie_king_logo.png"> </a>
+      <h1 class = "new_item">X Report</h1>
+
+      
+      <table>
+         <thead>
+            <tr>
+               <th class = "date_title">Date </th>
+               <th class = "name_of_smoothie_title">Name of Smoothie</th>
+               <th class = "price_title">Cost</th>
+               <th> 
+            </tr>
+         </thead>
+         <tbody>
+            {% for row in data %}
+               <tr>
+                     <td class = "date">{{row[0]}}</td>
+                     <td class = "name_of_smoothie">{{row[2]|replace("_", " ")}}</td>
+                     <td class = "price">${{row[4]}}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+      <button class = "close" title = "close x report" aria-label = "close x report" onclick="window.location.href='{{ url_for('managerPage')}}'">Close</button>
+   </body>
+</html>

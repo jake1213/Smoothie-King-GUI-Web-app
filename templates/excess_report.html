@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <title>Excess Report</title>
+      <link rel="stylesheet" href="/static/styles/manager.css" title = "link to manager stylesheet for excess report" aria-label = "link to manager stylesheet for excess report">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" title = "script for generating the excess report" aria-label = "script for generating the excess report"></script>
+      <script>
+         function callExcessReport() {
+            var loader = document.getElementById("loader");
+            loader.style.display = "block";
+            var timestamp = document.getElementById("timestamp").value;
+            if (timestamp) {
+               
+               var generate_button = document.getElementById("generate_button");
+               generate_button.style.display = "none";
+
+               var xhr = new XMLHttpRequest();
+
+               xhr.open("POST", "/generatedExcessReport");
+               xhr.setRequestHeader("Content-Type", "application/json");
+
+               xhr.onload = function() {
+                  if (xhr.status === 200) {
+                     // Callback function to update the DOM with new data
+                     updateReport(xhr.responseText);
+                  }
+                  else {
+                     alert('Errors: ' + xhr.statusText);
+                  }
+               };
+
+               xhr.send(JSON.stringify({"timestamp": timestamp}));
+            }
+            else {
+               console.log("ERROR: invalid format")
+            }
+         }
+
+         
+         function updateReport(data) {
+
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(data, "text/html");
+            var tableRows = doc.querySelectorAll('tbody tr');
+
+            var tableBody = document.querySelector('tbody');
+            tableBody.innerHTML = ''; // clear the table body
+
+            tableRows.forEach(function(row) {
+               var name = row.querySelector('td:nth-child(1)').textContent;
+               var quantity = row.querySelector('td:nth-child(2)').textContent;
+
+               var newRow = document.createElement('tr');
+
+               var nameCell = document.createElement('td');
+               nameCell.setAttribute("class", "excess_item");
+
+               var quantityCell = document.createElement('td');
+               quantityCell.setAttribute("class", "excess_quantity");
+               
+               nameCell.textContent = name;
+               quantityCell.textContent = quantity;
+               newRow.appendChild(nameCell);
+               newRow.appendChild(quantityCell);
+               tableBody.appendChild(newRow);
+            });
+
+            
+            var generate_button = document.getElementById("generate_button");
+            generate_button.style.display = "none";
+            var loader = document.getElementById("loader");
+            loader.style.display = "none";
+         }
+      </script>
+   </head>
+   <body>
+
+      <!-- translation -->
+      <div id="google_translate_element"></div>
+
+      <script type="text/javascript" title = "google translate styling for excess report page" aria-label = "google translate styling for excess report page">
+      function googleTranslateElementInit() {
+         new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+      </script>
+      
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title="script for google translate" aria-label="script for google translate"></script>
+
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title = "script for google translate on excess report" aria-label = "script for google translate on excess report"></script>
+
+      <a href="{{ url_for('home')}}" title = "back to home page logo from excess report" aria-label = "back to home page logo from excess report"><img class = "pic_logo" alt = "smoothie king logo" src="/static/pictures/smoothie_king_logo.png"> </a>
+      <h1 class = "new_item">Excess Report</h1>
+      <div class="container">
+         <h3 class = "enter_timestamp">Enter Timestamp: </h3>
+         <textarea id="timestamp" cols="30" rows="1" placeholder="yyyy-MM-dd HH:mm:ss"></textarea>
+      </div>
+      
+      <div id="loader" class="loader"></div>
+      <!-- all from data -->
+      <table>
+         <thead>
+            <tr>
+               <th class = "excess_item_title">Item in Excess</th>
+               <th class = "excess_quantity_title">Quantity Used</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for key, value in data.items() %}
+               <tr>
+                  <td class = "excess_item">{{ key|replace("_", " ") }}</td>
+                  <td class = "excess_quantity">{{ value }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+      <div class="container">
+         <button class = "close" title = "close excess report page" aria-label = "close excess report page" onclick="window.location.href='{{ url_for('managerPage')}}'">Close</button>
+         <button id="generate_button" title = "generate excess report" aria-label = "generate excess report" onclick="callExcessReport()">Generate Report</button>
+      </div>
+   </body>
+</html>

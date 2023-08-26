@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Ubuntu:wght@700&display=swap');
+
+.b{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /*background-color: #5F8575;*/
+    background-color: #e11c26;
+}
+
+.header_stuff{
+    display: flex;
+    justify-content: space-between;
+    max-width: 90%;
+    font-family: "Ubuntu";
+    padding-top: 45px;
+    color: white;
+    font-size: 60px;
+  
+  
+}
+
+.mlogin_button{
+  position: absolute;
+  margin-top : -80px;
+  margin-left : 1100px;
+  background-color: #7e0715;
+  padding: 10px;
+
+}
+
+.slogin_button{
+  position: absolute;
+    margin-top : -80px;
+    margin-left: 1300px;
+    /* margin-left : -50px; */
+    /* margin-right: -180px; */
+    background-color: #7e0715;
+    padding: 10px;
+  
+  }
+
+.order_button{
+    margin-top : 300px;
+    margin-left : -1250px;
+    background-color: #7e0715;
+    padding: 50px;
+    font-size: 45px;
+  
+  }
+
+
+
+.logo{
+    margin-top : 0px;
+    margin-left : 200px;
+  }
+
+.title_text1{
+    margin-top : 160px;
+    margin-left : -1100px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size : 70px;
+  }
+
+  /* .title_text2{
+    margin-top : 280px;
+    margin-left : -410px;
+    font-family: "Lucida Console", "Courier New", monospace;
+  } */
+
+
+
+button{
+    background-color: #7e0715;
+    padding: 2%;
+    color: white;
+    border: none;
+    font-family: "Ubuntu";
+    font-size: large;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+ }
+
+ 
+ 
+ button:active {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+ }
+ 
+ button:hover {
+    filter: brightness(80%);
+ }
+
+.map{
+    padding-top: 40px;
+    justify-content: space-evenly; 
+    margin-left: 880px;
+      margin-top: -460px;
+}
+
+/* #google_translate_element select {
+   
+ margin-left: 20px;
+ margin-top : 10px;
+ background-color: yellow;
+} */
+
+
+.whitex{
+  /* position: absolute; */
+  color: white;
+  text-align:center;
+  background-color: white;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}

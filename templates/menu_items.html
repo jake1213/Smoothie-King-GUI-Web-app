@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <title>Menu Item View</title>
+      <link rel="stylesheet" href="/static/styles/manager.css" title = "link for manager stylesheet for menu items page" aria-label = "link for manager stylesheet for menu items page">
+   </head>
+   <body>
+        <!-- translation -->
+      <div id="google_translate_element"></div>
+
+      <script type="text/javascript" title = "style google translate for add menu item" aria-label = "style google translate for add menu item">
+      function googleTranslateElementInit() {
+         new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+      </script>
+
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title = "google translate for add menu item page" aria-label = "google translate for add menu item page"></script>
+
+      <a title = "back to home page logo from menu items page" aria-label = "back to home page logo from menu items page" href="{{ url_for('home')}}"><img class = "pic_logo" alt = "smoothie king logo" src="/static/pictures/smoothie_king_logo.png"> </a>
+      <h1 class="menu_view">Menu Items</h1>
+        
+        <div class="section">
+            <form method="post" action="/editSmoothie">
+            <div class="manager-actions">
+                {% for smoothie in smoothies %}
+                    <button title = "button to edit smoothies" aria-label = "button to edit smoothies" name="name" value="{{smoothie[0]}}" id="{{smoothie[0]}}" onclick="editSmoothie()">{{smoothie[0]|replace("_", " ")}}</button>
+                {% endfor %}
+            </div>
+            </form>
+        </div>
+
+        <div class="container">
+            <button class = "close" title = "close menu items page" aria-label = "close menu items page" onclick="window.location.href='{{ url_for('managerPage')}}'">Close</button>
+        </div>
+   </body>
+</html>

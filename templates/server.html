@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <title>Server View</title>
+      <link rel="stylesheet" href="/static/styles/server.css" title="link to server stylesheet for server page" aria-label="link to server stylesheet for server page">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" title = "javascript script server" aria-label = "javascript script server"></script>
+   </head>
+   <body class = b>
+      <!-- translation -->
+      <div id="google_translate_element"></div>
+
+      <script type="text/javascript" title="google translate styling for server page" aria-label="google translate styling for server page">
+      function googleTranslateElementInit() {
+         new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+      </script>
+      
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title="google translate for server page" aria-label="google translate for server page"></script>
+      <a href="{{ url_for('home')}}" title = "back to home page logo from server" aria-label = "back to home page logo from server"><img class = "pic_logo" alt = "smoothie king logo" src="/static/pictures/smoothie_king_logo.png"> </a>
+      <h1 class = "MenuItems">Menu Items</h1>    
+        
+
+      <table>
+         <thead>
+            <tr>
+               <th class = "smoothieName">Name of Smoothie</th>
+               <th class = "smoothieCost">Cost</th>
+               <th class = "smoothieIngredients">Ingredients</th>
+               <th class = "smoothieQuantity">Quantity</th>
+            </tr>
+         </thead>    
+         <tbody>
+            <form aria-label = "order smoothie from server page" label = "order_smoothie_server" method="post" action="/orderviewserver">
+               {% for row in data %}    
+                  <tr>
+                     <td class = "smoothies">
+                        {{row[0]|replace("_", " ")}}
+                     </td> 
+                     <td class = "cost">
+                        ${{row[1]}}
+                     </td>  
+                     <td class = "ingredients">
+                        {%for i in range(row[2] | length)%}
+                           
+                           {%if i != (row[2] | length) - 1 %}
+                              {{(row[2][i] + ",") | replace("_", " ")}}
+                           {%endif%}
+                           {%if i == (row[2] | length) - 1 %}
+                              {{(row[2][i]) |replace("_", " ")}}
+                           {%endif%}
+                           
+                        {%endfor%}
+                     </td>
+                     <td class = "quantity">
+                        <label id="{{row[0]}}labelserver" for="{{row[0]}}"></label>
+                        <input type="text" id="{{row[0]}}" name="{{row[0]}}" placeholder="0" aria-labelledby="{{row[0]}}labelserver">
+                     </td>
+                  </tr>
+               {% endfor %}
+               <input class = "serverSubmit" title = "submit order for server" aria-label = "submit order for server" type="submit" value="Add to Cart" style = "background-color: #7e0715;;
+               padding: 1%;
+               color: white;
+               border: none;
+               font-size: large;
+               border-radius: 10px;
+               cursor: pointer;
+               position:absolute;
+               right: 20px;
+               top:75px;
+               ">
+            </form>
+         </tbody>
+      </table> 
+      <div class = "return_home"><a href="{{ url_for('home')}}" title = "return to home page button or log out" aria-label = "return to home page button or log out"><button title = "server log out"  aria-label = "server log out" class = "server_home" type = "submit" style ="background-color: #7e0715;;
+         padding: 1%;
+         color: white;
+         border: none;
+         font-size: large;
+         border-radius: 10px;
+         cursor: pointer;
+         position:absolute;
+         right: 160px;
+         top: 75px;
+         ">
+         Log Out
+      </button></a></div>
+
+   </body>
+</html>

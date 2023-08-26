@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>Orderview</title>
+</head>
+
+<body>
+	<!-- translation -->
+	<div id="google_translate_element"></div>
+
+	<script type="text/javascript" title="google translate styling for orderview server page" aria-label="google translate styling for orderview server page">
+	function googleTranslateElementInit() {
+		new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+	}
+	</script>
+	
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title="google translate for orderviewserver page" aria-label="google translate for orderviewserver page"></script>
+
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title = "script for google translate for order view server page" aria-label = "script for google translate for order view server page"></script>
+	<h1>View Order</h1>
+	<img class = "pic" alt = "smoothie king logo" src="/static/pictures/smoothie_king_logo.png">
+	<div style="display:flex;">
+	<link rel="stylesheet" href="/static/styles/orderview.css" title = "link for orderview stylesheet for orderview server page" aria-label = "link for orderview stylesheet for orderview server page">
+		<ul>
+			<h2 class = "column_header">Smoothies</h2><br> 
+			<div class = "smoothie_name">
+			{% for smoothie_name in smoothie_names %}
+			{{ smoothie_name |replace("_", " ")}}<br> 
+			{% endfor %}
+			</div>
+		  </ul>
+		  <ul>
+			<h2 class = "column_header">Quantities</h2><br> 
+			<div class = "quantity">
+			{% for quantity in quantities %}
+			  {{ quantity }}<br> 
+			{% endfor %}
+			</div>
+		  </ul>
+		  <ul>
+			<h2 class = "column_header">Price</h2><br> 
+			<div class = "price">
+			{% for price in prices %}
+			  ${{ price }}<br> 
+			{% endfor %}
+			</div>
+		  </ul>
+	</div>
+	<h2 class = "total">Total cost: ${{ price_total }}</h2>
+
+	<a title = "process order server" aria-label = "process order server"  href="{{ url_for('process_order_s')}}"><button class = "process" title = "submit order server" aria-label = "submit order server" type = "submit" > Finish Order </button></a>
+	<br><br>
+	<a title = "don't place order server" aria-label = "don't place order server"  href="{{ url_for('cancel_order_s')}}"><button class = "cancel" title = "cancel order server" aria-label = "cancel order server" type = "submit" > Cancel Order </button></a>
+</body>
+</html>

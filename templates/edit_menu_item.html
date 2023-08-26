@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <title>Edit Menu Item</title>
+      <link rel="stylesheet" href="/static/styles/manager.css" title = "manager stylesheet for edit menu item page" aria-label = "manager stylesheet for edit menu item page">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" title = "edit menu item javascript" aria-label = "edit menu item javascript"></script>
+      <script>
+         var ingredients = {{ inventory|tojson }}
+         var data = {{ data|tojson }}
+         function callSaveSmoothie(inventory) {
+            var ingredientQuantities = {};
+            var smoothie_name = data["name"]
+            ingredientQuantities["name"] = smoothie_name;
+            ingredientQuantities["cost"] = document.getElementById("cost").value;
+
+            // loop through all the ingredients and get the values from the corresponding textareas
+            for (var i = 0; i < ingredients.length; i++) {
+               var textareaId = ingredients[i];
+               var quantity = document.getElementById(textareaId).value;
+               if (quantity == "")
+                  quantity = "0.0"
+               ingredientQuantities[ingredients[i]] = quantity;
+            }
+            
+            // send the ingredient quantities to Flask
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/saveMenu");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+               if (xhr.readyState === 4 && xhr.status === 200) {
+                  console.log(xhr.responseText);
+               }
+            };
+            xhr.send(JSON.stringify(ingredientQuantities));
+         }
+      </script>
+   </head>
+   <body>
+
+      <!-- translation -->
+      <div id="google_translate_element"></div>
+
+      <script type="text/javascript" title = "style google translate for add menu item" aria-label = "style google translate for add menu item">
+      function googleTranslateElementInit() {
+         new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+      </script>
+
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title = "google translate for add menu item page" aria-label = "google translate for add menu item page"></script>
+
+
+      <a title = "back to home page logo from edit menu item" aria-label = "back to home page logo from edit menu item" href="{{ url_for('home')}}"><img class = "pic_logo" alt = "smoothie king logo" src="/static/pictures/smoothie_king_logo.png"> </a>
+      <h1 class="new_item">Edit Menu Item</h1>
+      <h2 class = "enter_name">Name:</h2>
+      <h3 class = "new_item_text" id="name" value="{{data["name"]}}">{{data["name"]|replace("_", " ")}}</h3>
+
+      <h2 class = "enter_cost">Cost:</h2>
+      <h3 class = "new_item_text" id="cost" value="{{data["cost"]}}">${{data["cost"]}}</h3>
+    
+      <h2 class = "enter_quantity">Edit Ingredient Quantities:</h2>
+      <table>
+         <tbody>
+            {% for row in data %}  
+                {% if (row == "name") %}
+                {% elif (row == "cost") %}
+                {% elif (row != "item_id") %}
+                    <tr>
+                        <td class="ingredient_name">{{row|replace("_", " ")}}</td>
+                        <td><textarea id="{{row}}" cols="10" rows="1">{{data[row]}}</textarea></td>
+                    </tr>
+               {% endif %}
+            {% endfor %}
+         </tbody>
+      </table>
+      
+
+      <div class="container">
+         <button title = "go to manager page from edit menu item"  aria-label = "go to manager page from edit menu item"  onclick="window.location.href='{{ url_for('menuItemPage')}}'">Close</button>
+         <button title = "save menu item edit"  aria-label = "save menu item edit"  onclick="callSaveSmoothie()">Save Smoothie</button>
+      </div>
+      <br>
+   </body>
+</html>

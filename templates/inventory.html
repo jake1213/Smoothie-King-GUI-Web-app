@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <title>Inventory View</title>
+      <link rel="stylesheet" href="/static/styles/manager.css" title = "link to manager stylesheet for inventory page" aria-label = "link to manager stylesheet for inventory page">
+   </head>
+   <body>
+
+      <!-- translation -->
+      <div id="google_translate_element"></div>
+
+      <script type="text/javascript" title = "style google translate for add menu item" aria-label = "style google translate for add menu item">
+      function googleTranslateElementInit() {
+         new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+      </script>
+
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title = "google translate for add menu item page" aria-label = "google translate for add menu item page"></script>
+
+      <script>
+         var ingredients = {{ data|tojson }}
+         function save() {
+            var updated_inventory = {}
+            // loop through all the ingredients and get the values from the corresponding textareas
+            for (var i = 0; i < ingredients.length; i++) {
+               var textareaId = ingredients[i][0];
+               var quantity = document.getElementById(textareaId).value;
+               if (quantity != ingredients[i][1]) {
+                  if (quantity == "")
+                     quantity = "0.0";
+                  
+                  updated_inventory[ingredients[i][0]] = quantity;
+               }
+            }
+            
+            // send the ingredient quantities to Flask
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/saveInventory", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+               if (xhr.readyState === 4 && xhr.status === 200) {
+                  console.log(xhr.responseText);
+               }
+            };
+            xhr.send(JSON.stringify(updated_inventory));
+         }
+      </script>
+
+      <a title = "back to home page logo from manager inventory page" aria-label = "back to home page logo from manager inventory page" href="{{ url_for('home')}}"><img class = "pic_logo" alt = "smoothie king logo" src="/static/pictures/smoothie_king_logo.png"> </a>
+      <h1 class="inventory">Inventory</h1>
+      <table>
+         <thead>
+            <tr>
+               <th class = "ingredient_title">Name of Ingredient</th>
+               <th class = "quantity_title">Quantity</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for row in data %}
+               <tr>
+                  <td class = "inventory_item_name">{{row[0]|replace("_", " ")}}</td>
+                  <td class = "inventory_item_quantity">
+                     <textarea id="{{row[0]}}" cols="10" rows="1">{{row[1]}}</textarea>
+                  </td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+      <div class="container">
+         <button title=  "save new inventory item button"  aria-label=  "save new inventory item button" onclick="save()">Save</button>
+         <button title = "back to manager page from inventory manager page" aria-label = "back to manager page from inventory manager page" onclick="window.location.href='{{ url_for('managerPage')}}'">Close</button>
+      </div>
+   </body>
+</html>

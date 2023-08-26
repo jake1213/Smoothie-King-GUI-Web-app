@@ -1,0 +1,35 @@
+<html lang="en-US">
+    <!-- HEADER -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- configure for multiple devices -->
+	<link rel="stylesheet" type="text/css" href="/static/styles/index_style.css" title = "link to index page styling" aria-label = "link to index page styling"></link> <!-- link css file -->
+    <title >Smoothie King</title> <!-- website title header -->
+
+    <body>
+        <div id="google_translate_element"></div>
+
+        <script type="text/javascript" title = "styling for index google translate" aria-label = "styling for index google translate">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+        </script>
+        
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title = "google translate for index page" aria-label = "google translate for index page"></script>
+            <h1 class = "whitex">x</h1>
+            <a href="{{ url_for('managerlogin')}}" title = "login for manager" aria-label = "login for manager"><button title = "manager login button" aria-label = "manager login button"  class = "mlogin_button" type = "submit">Manager Login</button></a>
+            <a href="{{ url_for('serverlogin')}}" title = "login for server" aria-label = "login for server"><button title = "server login button"  aria-label = "server login button" class = "slogin_button" type = "submit">Server Login</button></a>
+    </body>
+    <!-- BODY -->
+    <header>
+        <div class = "header_stuff">
+            <img class = "logo" alt = "smoothie king logo home page" src = "/static/pictures/home_pic.JPG" max-width = "150" height= "125">
+            <div class = "title_text1"> <em>SMOOTHIE KING</em></div>
+            <a href="{{ url_for('customerPage')}}" title = "customer place order" aria-label = "customer place order"><button title = "customer page button" aria-label = "customer page button"  class = "order_button" type = "submit">Place Order</button></a>        
+        </div>
+    </header>
+
+    <body class = "b">   
+        <div class = "map">
+            <iframe id = "google_map_api" title = "see smoothie king location" aria-label = "see smoothie king location" src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d45865.90007748312!2d-96.35365379311482!3d30.614042398707245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sSmoothie%20King!5e0!3m2!1sen!2sus!4v1681396330277!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </body>

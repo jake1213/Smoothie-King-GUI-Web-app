@@ -1,0 +1,381 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Ubuntu:wght@700&display=swap');
+
+* {
+   font-family: "Ubuntu";
+}
+
+body {
+   background-color: #e11c26;
+   margin: 0%;
+   /* padding-right: 5%; */
+   /* padding-left: 5%; */
+   height: 50vh;
+}
+
+button {
+   background-color: #7e0715;
+   padding: 1%;
+   color: white;
+   border: none;
+   font-size: large;
+   border-radius: 10px;
+   cursor: pointer;
+}
+
+button:active {
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+button:hover {
+   filter: brightness(80%);
+}
+
+.manager-actions {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 3%;
+   height: 500px;
+}
+
+.column_header {
+   font-size: 34px;
+   transform: translateX(50px);
+}
+
+.logout-container {
+   display: flex;
+   margin-top: 1%;
+   margin-bottom: 3%;
+}
+
+#logout-button {
+   margin-left: auto;
+   margin-right: 0px;
+   
+   border-radius: 5px;
+   padding-top: 1%;
+   padding-bottom: 1%;
+}
+
+#translate-button {
+   margin-left: 0px;
+   margin-right: auto;
+   position: fixed;
+   bottom: 0;
+   margin-bottom: 1%;
+
+   border-radius: 5px;
+   padding-top: 1%;
+   padding-bottom: 1%;
+}
+
+.quantity{
+   padding-left: 50px;
+   color: white;
+}
+
+.quantity_title{
+   padding-left: 50px;
+   color: white;
+   font-size: 20px;
+   text-decoration: underline;
+}
+
+.ingredient{
+   color: white;
+   padding-left: 50px;
+}
+
+.ingredient_title{
+   color: white;
+   font-size: 20px;
+   text-decoration: underline;
+   padding-left: 50px;
+}
+
+.inventory{
+   color:  #7e0715;
+   background-color: white;
+   padding-top: 20px;
+   padding-bottom: 20px;
+   font-size: 45px;
+   text-align: center;
+}
+
+.close{
+   background-color: #7e0715;
+   position:absolute;
+   padding: 1%;
+   color: white;
+   border: none;
+   font-size: large;
+   border-radius: 10px;
+   cursor: pointer;
+   top: 75px;
+   right: 50px;
+}
+
+.pic_logo{
+   height: 80px;
+   width: auto;
+   position:absolute;
+   top:60px;
+   left: 50px;
+}
+
+.menu_view{
+   color:  #7e0715;
+   background-color: white;
+   padding-top: 20px;
+   padding-bottom: 20px;
+   font-size: 45px;
+   text-align: center;
+}
+
+.smoothie_name_title{
+   font-size: 20px;
+   text-decoration: underline;
+   color: white;
+   text-align: left;
+   padding-left: 10px;
+}
+
+.smoothie_cost_title{
+   font-size: 20px;
+   text-decoration: underline;
+   color: white;
+   text-align: left;
+   padding-left: 30px;
+}
+
+.smoothie_ingredients_title{
+   font-size: 20px;
+   text-decoration: underline;
+   color: white;
+   text-align: left;
+   padding-left: 30px;
+}
+
+.smoothie_name{
+   color: white;
+   font-size: 14px;
+   padding-left: 10px;
+}
+
+.smoothie_cost{
+   color: white;
+   font-size: 14px;
+   padding-left: 30px;
+}
+
+.smoothie_ingredients{
+   color: white;
+   font-size: 14px;
+   padding-left: 30px;
+}
+
+.new_item{
+   color:  #7e0715;
+   background-color: white;
+   padding-top: 20px;
+   padding-bottom: 20px;
+   font-size: 45px;
+   text-align: center;
+}
+
+.enter_name{
+   padding-left: 20px;
+   color: white;
+}
+
+.enter_quantity{
+   padding-left: 20px;
+   color: white;
+}
+
+.new_item_text{
+   margin-left: 20px;
+   color: white;
+}
+
+.container{
+   margin-left: 19px;
+   margin-top: 20px; 
+}
+
+.enter_cost{
+   padding-left: 20px;
+   color: white;
+}
+
+.ingredient_name{
+   padding-left: 20px;
+   color: white;
+}
+
+.date_title{
+   font-size: 20px;
+   text-decoration: underline;
+   color: white;
+   text-align: left;
+   padding-left: 20px;
+}
+
+.name_of_smoothie_title{
+   font-size: 20px;
+   text-decoration: underline;
+   color: white;
+   text-align: left;
+   padding-left: 30px;
+}
+
+.price_title{
+   font-size: 20px;
+   text-decoration: underline;
+   color: white;
+   text-align: left;
+   padding-left: 30px;
+}
+
+.date{
+   color:white;
+   padding-left: 20px;
+   font-size: 15px;
+}
+
+.name_of_smoothie{
+   color:white;
+   padding-left: 30px;
+   font-size: 15px;
+}
+
+.price{
+   color:white;
+   padding-left: 30px;
+   font-size: 15px;
+}
+
+.enter_timestamp{
+   color: white;
+}
+
+.excess_item_title{
+   color: white;
+   padding-left: 18px;
+   font-size: 20px;
+   text-decoration: underline;
+}
+
+.excess_quantity_title{
+   color: white;
+   padding-left: 25px;
+   font-size: 20px;
+   text-decoration: underline;
+}
+
+.excess_item{
+   color: white;
+   padding-left: 20px;
+   font-size: 15px;
+}
+
+.excess_quantity{
+   color: white;
+   padding-left: 30px;
+   font-size: 15px;
+}
+
+
+.sales_head{
+   color: white;
+   font-size: 18px;
+   padding-left: 20px;
+   text-align: left;
+   text-decoration: underline;
+}
+
+.loader {
+   border: 8px solid #f3f3f3;
+   border-radius: 50%;
+   border-top: 8px solid #3498db;
+   width: 60px;
+   height: 60px;
+   animation: spin 2s linear infinite;
+   margin: auto;
+   display: none;
+ }
+ 
+ @keyframes spin {
+   0% { transform: rotate(0deg); }
+   100% { transform: rotate(360deg); }
+ }
+
+ .order_time{
+   color: white;
+   padding-left: 20px;
+ }
+
+ .order_num{
+   color: white;
+   padding-left: 25px;
+ }
+
+ .order_smoothie{
+   color: white;
+   padding-left: 20px;
+ }
+
+ .order_quantity{
+   color: white;
+   padding-left: 25px;
+ }
+
+ .order_price{
+   color: white;
+   padding-left: 20px;
+ }
+
+.section {
+    margin-right: 3%;
+    margin-left: 3%;
+}
+
+ .close_restock_report{
+   background-color: #7e0715;
+   position:absolute;
+   padding: 1%;
+   color: white;
+   border: none;
+   font-size: large;
+   border-radius: 10px;
+   cursor: pointer;
+   top: 90px;
+   right: 50px;
+}
+
+.restock_head{
+   color: white;
+   font-size: 20px;
+   padding-left: 20px;
+   text-align: left;
+   text-decoration: underline;
+}
+
+.restock_item{
+   color:white;
+   padding-left: 20px;
+}
+
+.current_quantity{
+   color: white;
+   padding-left: 25px;
+}
+
+.inventory_item_name{
+   color: white;
+   padding-left: 50px;
+}
+
+.inventory_item_quantity{
+   padding-left: 50px;
+}

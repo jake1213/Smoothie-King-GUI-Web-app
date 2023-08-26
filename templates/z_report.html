@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <title>Z Report</title>
+      <link rel="stylesheet" href="/static/styles/manager.css" title = "link to manager stylesheet for z report page" aria-label = "link to manager stylesheet for z report page">
+   </head>
+   <body>
+      <!-- translation -->
+      <div id="google_translate_element"></div>
+
+      <script type="text/javascript" title="google translate styling for z report" aria-label="google translate styling for z report">
+      function googleTranslateElementInit() {
+         new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+      </script>
+      
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title="google translate for z report" aria-label="google translate for z report"></script>
+      <a href="{{ url_for('home')}}" title = "back to home page logo from z report" aria-label = "back to home page logo from z report"><img class = "pic_logo" alt = "smoothie king logo" src="/static/pictures/smoothie_king_logo.png"> </a>
+      <h1 class = "new_item">Z Report</h1>
+
+      
+      <table>
+         {% if data %}
+         <thead>
+            <tr>
+               <th class = "date_title">Date </th>
+               <th class = "name_of_smoothie_title">Name of Smoothie</th>
+               <th class = "price_title">Cost</th>
+               <th> 
+            </tr>
+         </thead>
+         {% endif %}
+         <tbody>
+            {% for row in data %}
+               <tr>
+                     <td class = "date">{{row[0]}}</td>
+                     <td class = "name_of_smoothie">{{row[2]|replace("_", " ")}}</td>
+                     <td class = "price">{{row[4]}}
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+      <button class = "close" title = "close z report" aria-label = "close z report" onclick="window.location.href='{{ url_for('managerPage')}}'">Close</button>
+   </body>
+</html>

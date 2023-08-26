@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <title>Add Menu Item</title>
+      <link rel="stylesheet" href="/static/styles/manager.css" title = "manager stylesheet link for add menu item page" aria-label = "manager stylesheet link for add menu item page">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" title = "save smoothie script" aria-label = "save smoothie script"></script>
+      <script>
+         var ingredients = {{ data|tojson }}
+         function callSaveSmoothie() {
+            var ingredientQuantities = {};
+            ingredientQuantities["name"] = document.getElementById("new_smoothie_name").value;
+            ingredientQuantities["cost"] = document.getElementById("new_smoothie_cost").value;
+
+            // loop through all the ingredients and get the values from the corresponding textareas
+            for (var i = 0; i < ingredients.length; i++) {
+               var textareaId = ingredients[i];
+               var quantity = document.getElementById(textareaId).value;
+               if (quantity == "")
+                  quantity = "0.0"
+               ingredientQuantities[ingredients[i]] = quantity;
+            }
+            
+            // send the ingredient quantities to Flask
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/saveSmoothie", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function() {
+               if (xhr.readyState === 4 && xhr.status === 200) {
+                  console.log(xhr.responseText);
+               }
+            };
+            xhr.send(JSON.stringify(ingredientQuantities));
+         }
+      </script>
+   </head>
+   <body>
+
+      <!-- translation -->
+      <div id="google_translate_element"></div>
+
+      <script type="text/javascript" title = "style google translate for add menu item" aria-label = "style google translate for add menu item">
+      function googleTranslateElementInit() {
+         new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+      </script>
+      
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" aria-label = "google translate for add menu item page" title = "google translate for add menu item page"></script>
+
+      <a title = "back to home page logo" aria-label = "back to home page logo from add menu item page" href="{{ url_for('home')}}"><img class = "pic_logo" alt = "smoothie king logo" src="/static/pictures/smoothie_king_logo.png"> </a>
+      <h1 class="new_item">Add New Menu Item</h1>
+      <h2 class = "enter_name">Enter Name:</h2>
+      <textarea class = "new_item_text" id="new_smoothie_name" cols="50" rows="1" placeholder="smoothie name"></textarea>
+
+      <h2 class = "enter_cost">Enter Cost:</h2>
+      <textarea class = "new_item_text" id="new_smoothie_cost" cols="50" rows="1" placeholder="0.00"></textarea>
+
+      <h2 class = "enter_quantity">Enter Ingredient Quantities:</h2>
+      <table>
+         <tbody>
+            {% for row in data %}    
+               <tr>
+                  <td class = "ingredient_name">{{row[0]|replace("_", " ")}}</td>
+                  <td><textarea id="{{row[0]}}" cols="10" rows="1" placeholder="0.0"></textarea></td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+      
+
+      <div class="container">
+         <button title = "back to manager page from add menu item page" aria-label = "back to manager page from add menu item page" onclick="window.location.href='{{ url_for('managerPage')}}'">Close</button>
+         <button title = "save new menu item button" aria-label = "save new menu item button" onclick="callSaveSmoothie()">Submit New Smoothie</button>
+      </div>
+      <br>
+   </body>
+</html>

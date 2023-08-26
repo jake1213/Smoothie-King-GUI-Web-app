@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Ubuntu:wght@700&display=swap');
+
+* {
+  font-family: "Ubuntu";
+}
+
+body {
+  background-color: #e11c26;
+    color: rgb(239, 239, 239);
+  }
+  
+  h1 {
+    text-align: center;
+    font-size: 60px;
+    background-color: white;
+    color: #e11c26;
+
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  h2{
+    text-align: left;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 40px;
+  }
+  
+  div {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  nav {
+    text-align: center;
+  }
+
+  .smoothie_name{
+    margin-left: 50px;
+  }
+  .quantity{
+    margin-left: 70px;
+  }
+  .price{
+    margin-left: 70px;
+  }
+  
+  .process {
+    background-color: #7e0715;
+    font-family: "Ubuntu";
+    font-size: 40px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 350px;
+    height: 80px;
+    margin-left: 90px;
+  }
+
+  .cancel {
+    position: relative;
+    background-color: #7e0715;
+    font-family: "Ubuntu";
+    font-size: 40px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 350px;
+    height: 80px;
+    margin-left: 90px;
+  }
+  
+  button:hover {
+    background-color: rgb(92, 92, 92);
+    color: rgb(217, 217, 217);
+  }
+
+  .column_header {
+    font-size: 34px;
+    text-align: left;
+  }
+
+  .column_header {
+    font-size: 34px;
+    transform: translateX(50px);
+  }
+
+  .total{
+    margin-left: 90px;
+  }
+
+  .pic{
+    height: 100px;
+    width: auto;
+    position: absolute;
+    top: 70px;
+    left: 50px;
+    /* right: 150px; */
+  }

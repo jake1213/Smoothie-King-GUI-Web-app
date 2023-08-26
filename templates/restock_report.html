@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <title>Restock Report</title>
+      <link rel="stylesheet" href="/static/styles/manager.css" title="link to manager stylesheet for restock report page" aria-label="link to manager stylesheet for restock report page">
+   </head>
+   <body>
+
+      <!-- translation -->
+      <div id="google_translate_element"></div>
+
+      <script type="text/javascript" title = "google translate styling for restock report page" aria-label = "google translate styling for restock report page">
+      function googleTranslateElementInit() {
+         new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+      </script>
+      
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title = "google translate for restock report" aria-label = "google translate for restock report"></script>
+
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title = "script for google translate for restock report" aria-label = "script for google translate for restock report"></script>
+      <a href="{{ url_for('home')}}" title = "back to home page logo from restock report" aria-label = "back to home page logo from restock report"><img class = "pic_logo" alt = "smoothie king logo" src="/static/pictures/smoothie_king_logo.png"> </a>
+      <h1 class = "new_item">Restock Report</h1>
+      
+      <!-- all from data -->
+      <table>
+         <thead>
+            <tr>
+               <th class = "restock_head">Item</th>
+               <th class = "restock_head">Current Quantity</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for row in data %}
+               <tr>
+                  <td class = "restock_item">{{row[0]|replace("_", " ")}}</td>
+                  <td class = "current_quantity">{{row[1]}}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+      <button class = "close" title = "close restock report" aria-label = "close restock report" onclick="window.location.href='{{ url_for('managerPage')}}'">Close</button>
+   </body>
+</html>

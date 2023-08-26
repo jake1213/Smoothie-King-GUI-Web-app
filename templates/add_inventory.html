@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <title>Add Inventory</title>
+      <link rel="stylesheet" href="/static/styles/manager.css" title = "manager stylesheet for add inventory page" aria-label="manager stylesheet for add inventory page">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" title = "script to save new ingredient" aria-label = "script to save new ingredient"></script>
+      <script>
+         function callSaveIngredient() {
+            var name = document.getElementById("new_ingredient_name").value;
+            var quantity = document.getElementById("new_ingredient_quantity").value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/saveIngredient");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify({"name": name, "quantity": quantity}));
+
+            // clears the text areas
+            document.getElementById("new_ingredient_name").value = null
+            document.getElementById("new_ingredient_quantity").value = null
+         }
+      </script>
+      
+   </head>
+   <body>
+
+      <!-- translation -->
+      <div id="google_translate_element"></div>
+
+      <script type="text/javascript" title = "styling for google translate for add inventory page" aria-label = "styling for google translate for add inventory page">
+      function googleTranslateElementInit() {
+         new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+      </script>
+      
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title = "google translate for add inventory page" aria-label = "google translate for add inventory page"></script>
+
+
+      <a title = "back to home page logo from add inventory page" aria-label = "back to home page logo from add inventory page" href="{{ url_for('home')}}"><img class = "pic_logo" alt = "smoothie king logo" src="/static/pictures/smoothie_king_logo.png"> </a>
+      <h1 class="new_item">Add New Inventory Item</h1>
+      <h2 class = "enter_name">Enter Name:</h2>
+      <textarea class = "new_item_text" id="new_ingredient_name" cols="50" rows="1" placeholder="ingredient name"></textarea>
+
+      <h2 class = "enter_quantity">Enter Quantity:</h2>
+      <textarea class = "new_item_text" id="new_ingredient_quantity" cols="50" rows="1" placeholder="0.0"></textarea>
+
+      <div class="container">
+         <button title="back to manager page from add inventory page" aria-label="back to manager page from add inventory page" onclick="window.location.href='{{ url_for('managerPage')}}'">Close</button>
+         <button title = "save new ingredient" aria-label = "save new ingredient" onclick="callSaveIngredient()">Submit New Ingredient</button>
+      </div>
+   </body>
+</html>

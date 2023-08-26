@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Ubuntu:wght@700&display=swap');
+
+.b{
+    background-color: #e11c26;
+    font-family: "Ubuntu";
+}
+
+.customerSubmit{
+    font-family: "Ubuntu";
+}
+
+.customer_home{
+    font-family: "Ubuntu";
+}
+
+.MenuItems{
+    color:  #7e0715;
+    font-family: "Ubuntu";
+    font-size: 45px;
+    background-color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: -10px;
+    margin-right: -8px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.pic_logo{
+    height: 80px;
+    width: auto;
+    position:absolute;
+    top:60px;
+    left: 20px;
+}
+
+.mainStuff{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    font-family: "Ubuntu";
+    font-size: 14px;
+}
+
+.inLoop{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-right: 70px;
+    margin-bottom: 100px;
+}
+
+.beforeInfo{
+    display:grid;
+    grid-row: 1 / span 4;
+}
+
+.pic {
+    height:150px;
+    width:auto;
+    border-radius: 10px;
+}
+
+.smoothies{
+    color: white;
+    font-size: 15px;
+}
+
+.ingredients{
+    color: white;
+}
+
+.cost{
+    color: white;
+}
+
+.quantity{
+    font-family: "Ubuntu";
+}
+
+

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-US">
+   <head>
+      <title>Sales Report</title>
+      <link rel="stylesheet" href="/static/styles/manager.css" title="link to manager stylesheet for sales report page" aria-label="link to manager stylesheet for sales report page">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" title ="javascript script to generate sales report" aria-label ="javascript script to generate sales report"></script>
+      <script>
+         function callSalesReport() {
+            var loader = document.getElementById("loader");
+            loader.style.display = "block";
+
+            var start_time = document.getElementById("start_time").value;
+            var end_time = document.getElementById("end_time").value;
+            if (start_time && end_time) {
+               var generate_button = document.getElementById("generate_button");
+               generate_button.style.display = "none";
+
+               var xhr = new XMLHttpRequest();
+
+               xhr.open("POST", "/generatedSalesReport");
+               xhr.setRequestHeader("Content-Type", "application/json");
+
+               xhr.onreadystatechange = function() {
+                  if (xhr.readyState === 4 && xhr.status === 200) {
+                     console.log(xhr.responseText);
+                     updateReport(xhr.responseText);
+                  }
+               };
+               xhr.send(JSON.stringify({"start_time": start_time, "end_time": end_time}));
+            }
+            else {
+               console.log("ERROR: invalid format")
+            }
+         }
+
+         function updateReport(data) {
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(data, "text/html");
+            var tableRows = doc.querySelectorAll('tbody tr');
+
+            var tableBody = document.querySelector('tbody');
+            tableBody.innerHTML = ''; // clear the table body
+
+            tableRows.forEach(function(row) {
+               var time = row.querySelector('td:nth-child(1)').textContent;
+               var order_num = row.querySelector('td:nth-child(2)').textContent;
+               var smoothie = row.querySelector('td:nth-child(3)').textContent;
+               var quantity = row.querySelector('td:nth-child(4)').textContent;
+               var price = row.querySelector('td:nth-child(5)').textContent;
+
+               var timeCell = document.createElement('td');
+               timeCell.setAttribute("class", "order_time");
+
+               var order_numCell = document.createElement('td');
+               order_numCell.setAttribute("class", "order_num");
+
+               var smoothieCell = document.createElement('td');
+               smoothieCell.setAttribute("class", "order_smoothie");
+
+               var quantityCell = document.createElement('td');
+               quantityCell.setAttribute("class", "order_quantity");
+
+               var priceCell = document.createElement('td');
+               priceCell.setAttribute("class", "order_price");
+
+               var newRow = document.createElement('tr');
+
+               timeCell.textContent = time;
+               order_numCell.textContent = order_num;
+               smoothieCell.textContent = smoothie;
+               quantityCell.textContent = quantity;
+               priceCell.textContent = price;
+
+               newRow.appendChild(timeCell);
+               newRow.appendChild(order_numCell);
+               newRow.appendChild(smoothieCell);
+               newRow.appendChild(quantityCell);
+               newRow.appendChild(priceCell);
+               tableBody.appendChild(newRow);
+            });
+
+            var loader = document.getElementById("loader");
+            loader.style.display = "none";
+         }
+      </script>
+   </head>
+   <body>
+      <!-- translation -->
+      <div id="google_translate_element"></div>
+
+      <script type="text/javascript" title="google translate styling for sales report page" aria-label="google translate styling for sales report page">
+      function googleTranslateElementInit() {
+         new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+      }
+      </script>
+      
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title = "google translate for sales report page" aria-label = "google translate for sales report page"></script>
+
+      <a href="{{ url_for('home')}}" title = "back to home page logo from sales report page" aria-label = "back to home page logo from sales report page"><img class = "pic_logo" alt = "smoothie king logo" src="/static/pictures/smoothie_king_logo.png"> </a>
+      <h1 class = "new_item">Sales Report</h1>
+
+      <div class="container">
+         <h3 class = "time_title">Enter Start Time: </h3>
+         <textarea id="start_time" cols="30" rows="1" placeholder="yyyy-MM-dd HH:mm:ss"></textarea>
+      </div>
+      <div class="container">
+         <h3 class = "time_title">Enter End Time: </h3>
+         <textarea id="end_time" cols="30" rows="1" placeholder="yyyy-MM-dd HH:mm:ss"></textarea>
+      </div>
+      
+
+      <div id="loader" class="loader"></div>
+      <!-- all from data -->
+      <table>
+         <thead>
+            <tr>
+               <th class = "sales_head">Time</th>
+               <th class = "sales_head">Order Number</th>
+               <th class = "sales_head">Smoothie</th>
+               <th class = "sales_head">Quantity</th>
+               <th class = "sales_head">Price</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for key, value in data.items() %}
+               <tr>
+                  <td class = "order_time">{{ value[0] }}</td>
+                  <td class = "order_num">{{ value[1] }}</td>
+                  <td class = "order_smoothie">{{ value[2]|replace("_", " ") }}</td>
+                  <td class = "order_quantity">{{ value[3] }}</td>
+                  <td class = "order_price">${{ value[4] }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+
+      <div class="container">
+         <button class = "close" title = "close sales report" aria-label = "close sales report" onclick="window.location.href='{{ url_for('managerPage')}}'">Close</button>
+         <button id="generate_button" title = "generate sales report" aria-label = "generate sales report" onclick="callSalesReport()">Generate Report</button>
+      </div>
+   </body>
+</html>

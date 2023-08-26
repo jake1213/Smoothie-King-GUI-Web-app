@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>Orderview</title>
+	<link rel="stylesheet" href="/static/styles/orderview.css" title = "link to orderview stylesheet for customer" aria-label = "link to orderview stylesheet for customer">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" title = "javascript script orderviewcustomer" aria-label = "javascript script orderviewcustomer"></script>
+
+</head>
+
+<body>
+
+	<!-- translation -->
+	<div id="google_translate_element"></div>
+
+	<script type="text/javascript" title = "google translate styling for orderviewcustomer page" aria-label = "google translate styling for orderviewcustomer page">
+	function googleTranslateElementInit() {
+		new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+	}
+	</script>
+	
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" title="google translate for orderview customer page" aria-label="google translate for orderview customer page"></script>
+	<h1>View Order</h1>
+	<img class = "pic" alt = "smoothie king logo" src="/static/pictures/smoothie_king_logo.png">
+	<div style="display:flex;">
+		<ul>
+			<h2 class = "column_header">Smoothies</h2><br> 
+			<div class = "smoothie_name">
+			{% for smoothie_name in smoothie_names %}
+			{{ smoothie_name|replace("_", " ") }}<br> 
+			{% endfor %}
+			</div>
+		  </ul>
+		  <ul>
+			<h2 class = "column_header">Quantities</h2><br> 
+			<div class = "quantity">
+			{% for quantity in quantities %}
+			  {{ quantity }}<br> 
+			{% endfor %}
+			</div>
+		  </ul>
+		  <ul>
+			<h2 class = "column_header">Price</h2><br> 
+			<div class = "price">
+			{% for price in prices %}
+			  ${{ price }}<br> 
+			{% endfor %}
+			</div>
+		  </ul>
+	</div>
+	<h2 class = "total">Total cost: ${{ price_total }}</h2>
+
+	<a href="{{ url_for('process_order_c')}}" title = "submit order customer" aria-label = "submit order customer"><button title = "finish order button for customer" aria-label = "finish order button for customer"  class = "process" type = "submit" > Finish Order </button></a>
+	<br><br>
+	<a href="{{ url_for('cancel_order_c')}}" title = "cancel order customer" aria-label = "cancel order customer"><button title = "don't place order for customer" aria-label = "don't place order for customer" class = "cancel" type = "submit" > Cancel Order </button></a>
+</body>
+
+</html>
